@@ -1,20 +1,21 @@
-function computerPlay() {
-    let game = ["Rock", "Paper", "Scissors"];
-    let value = game[Math.floor(Math.random()*game.length)];
-    console.log("Computer chooses", value);
-
-    return value.toUpperCase();
-}
-
-
 function playerPlay() {
-    let value = prompt("Write a value:").toUpperCase();
+    let result = prompt("Make a choice:").toUpperCase();
 
-    return value;
+    return result;
+}
+
+function computerPlay() {
+    let gameArray = ["Rock", "Paper", "Scissors"];
+    let result = gameArray[Math.floor(Math.random() * gameArray.length)];
+    console.log("Computer chooses", result);
+
+    return result.toUpperCase();
 }
 
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
+    
+    let computerSelection = computerPlay();
     
     if (playerSelection === "ROCK") {
         if (computerSelection === "ROCK") {
@@ -42,20 +43,25 @@ function playRound(playerSelection, computerSelection) {
         } else if (computerSelection === "PAPER") {
             return("You win! Scissors beat Paper");
         } else {
-            return("It's a draw!")
+            return("It's a draw!");
         }
     }
      
 }
 
 
-function game() {
-    
-    for (let i = 1; i <= 5; i++) {
-        let playerSelection = playerPlay();
-        let computerSelection = computerPlay();
-        console.log(playRound(playerSelection, computerSelection));
-    }
-}
+const btnRock = document.querySelector('#rock');
+btnRock.addEventListener('click', function() {
+    console.log(playRound("ROCK"));
+})
 
-game();
+const btnPaper = document.querySelector('#paper');
+btnPaper.addEventListener('click', function() {
+    console.log(playRound("PAPER"));
+})
+
+const btnScissors = document.querySelector('#scissors');
+btnScissors.addEventListener('click', function() {
+    console.log(playRound("SCISSORS"));
+})
+
