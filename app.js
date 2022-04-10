@@ -1,8 +1,24 @@
 let playerScore = 0;
 let computerScore = 0;
-const info = document.querySelector("#info");
 const textPlayer = document.querySelector("#scorePlayer");
 const textComputer = document.querySelector("#scoreComputer");
+const info = document.querySelector("#info");
+
+const newButton = document.createElement("button");
+newButton.textContent = "New Game!";
+newButton.style.cssText = "margin: 0 auto; color: green;";
+
+newButton.addEventListener('click', function() {
+    computerScore = 0;
+    playerScore = 0;
+    textPlayer.textContent = playerScore;
+    textComputer.textContent = computerScore;
+    info.textContent = "Make your choice!";
+    newButton.parentNode.replaceChild(info, newButton);
+
+})
+
+
 
 function playerPlay() {
     let result = prompt("Make a choice:").toUpperCase();
@@ -55,6 +71,20 @@ function playRound(playerSelection) {
      
 }
 
+function finalScore() {
+    if (playerScore === 5) {
+        alert("You won!");
+        info.textContent = "New Game";
+        info.parentNode.replaceChild(newButton, info);
+    }
+    
+    if (computerScore === 5) {
+        alert("You lost");
+        info.textContent = "New Game";
+        info.parentNode.replaceChild(newButton, info);
+    }
+}
+
 
 const btnRock = document.querySelector('#rock');
 btnRock.addEventListener('click', function() { 
@@ -62,6 +92,7 @@ btnRock.addEventListener('click', function() {
     textPlayer.textContent = playerScore;
     textComputer.textContent = computerScore;
 
+    finalScore();
 })
 
 const btnPaper = document.querySelector('#paper');
@@ -69,6 +100,8 @@ btnPaper.addEventListener('click', function() {
     info.textContent = playRound("PAPER")[0];
     textPlayer.textContent = playerScore;
     textComputer.textContent = computerScore;
+
+    finalScore();
 })
 
 const btnScissors = document.querySelector('#scissors');
@@ -76,6 +109,8 @@ btnScissors.addEventListener('click', function() {
     info.textContent = playRound("SCISSORS")[0];
     textPlayer.textContent = playerScore;
     textComputer.textContent = computerScore;
+
+    finalScore();
 })
 
 
